@@ -71,10 +71,91 @@ LinkedList.prototype.pop = function () {
   this.length--;
 };
 
-const linkedList = new LinkedList();
+LinkedList.prototype.unshift = function (value) {
+  if (!this.head) {
+    this.push(value);
+  } else {
+    const node = new Node(value);
+    node.next = this.head;
+    this.head = node;
+    this.length++;
+  }
+};
 
-linkedList.push(5);
+LinkedList.prototype.shift = function () {
+  if (!this.head) throw "Linked List empty";
 
-linkedList.pop();
+  if (this.length === 1) return this.pop();
 
-console.log(linkedList);
+  let head = this.head;
+
+  this.head = this.head.next;
+  head.next = null;
+  this.length--;
+};
+
+LinkedList.prototype.get = function (index) {
+  if (index < 0 || index >= this.length) throw "Invalid index";
+
+  let node = this.head;
+
+  for (let i = 0; i < index; i++) {
+    node = node.next;
+  }
+
+  return node;
+};
+
+LinkedList.prototype.set = function (index, value) {
+  let node = this.get(index);
+
+  node.value = value;
+};
+
+LinkedList.prototype.insert = function (index, value) {
+  if (index < 0 || index >= this.length) throw "Invalid index";
+
+  if (index === 0 || !this.head) return this.unshift(value);
+
+  if (index === this.length) return this.push(value);
+
+  const node = new Node(value);
+
+  const previousIndex = this.get(index - 1);
+
+  node.next = previousIndex.next;
+  previousIndex.next = node;
+  this.length++;
+};
+
+LinkedList.prototype.remove = function (index) {
+  if (index < 0 || index >= this.length) throw "Invalid index";
+
+  if (this.length - 1 === index) return this.pop();
+
+  if (index === 0) return this.shift();
+
+  const previous = this.get(index - 1);
+  const current = previous.next;
+
+  previous.next = current.next;
+  current.next = null;
+  this.length--;
+};
+
+LinkedList.prototype.reverse = function () {
+  let temp = this.head;
+  this.head = this.tail;
+  this.tail = temp;
+
+  let next = temp.next;
+
+  let previous = null;
+
+  for (let i = 0; i < this.length; i++) {
+    next = temp.next;
+    temp.next = previous;
+    previous = temp;
+    temp = next;
+  }
+};
