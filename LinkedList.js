@@ -113,11 +113,11 @@ LinkedList.prototype.set = function (index, value) {
 };
 
 LinkedList.prototype.insert = function (index, value) {
-  if (index < 0 || index >= this.length) throw "Invalid index";
-
-  if (index === 0 || !this.head) return this.unshift(value);
-
   if (index === this.length) return this.push(value);
+
+  if (index < 0 || index > this.length) throw "Invalid index";
+
+  if (index === 0) return this.unshift(value);
 
   const node = new Node(value);
 
