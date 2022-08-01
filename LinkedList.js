@@ -158,3 +158,5 @@ LinkedList.prototype.reverse = function () {
     temp = next;
   }
 };
+
+module.exports = LinkedList;

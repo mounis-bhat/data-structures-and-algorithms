@@ -125,3 +125,5 @@ DoublyLinkedList.prototype.remove = function (index) {
 
   this.length--;
 };
+
+module.exports = DoublyLinkedList;

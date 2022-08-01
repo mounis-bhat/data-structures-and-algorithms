@@ -66,3 +66,5 @@ Queue.prototype.dequeue = function () {
   }
   this.length--;
 };
+
+module.exports = { Stack, Queue };
