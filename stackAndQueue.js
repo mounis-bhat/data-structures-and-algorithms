@@ -31,6 +31,7 @@ Stack.prototype.pop = function () {
   this.top = this.top.next;
   temp.next = null;
   this.length--;
+  return temp.value;
 };
 
 class Queue {

@@ -5,7 +5,15 @@ Graph.prototype.addVertex = function (vertex) {
   throw "Vertex already exists";
 };
 
-Graph.prototype.addEdge = function (firstVertex, secondVertex) {
+Graph.prototype.addEdge = function (fromVertex, toVertex) {
+  if (this[fromVertex] && this[toVertex]) {
+    this[fromVertex].push(toVertex);
+  } else {
+    throw "Invalid edges";
+  }
+};
+
+Graph.prototype.addEdgeBiDirectional = function (firstVertex, secondVertex) {
   if (this[firstVertex] && this[secondVertex]) {
     this[firstVertex].push(secondVertex);
     this[secondVertex].push(firstVertex);
@@ -13,8 +21,6 @@ Graph.prototype.addEdge = function (firstVertex, secondVertex) {
     throw "Invalid edges";
   }
 };
-
-//! Creates bi-directional edges
 
 Graph.prototype.removeEdge = function (firstVertex, secondVertex) {
   if (this[firstVertex] && this[secondVertex]) {
@@ -29,8 +35,6 @@ Graph.prototype.removeEdge = function (firstVertex, secondVertex) {
     throw "Invalid edges";
   }
 };
-
-//! Works only with graphs with bi-directional edges
 
 Graph.prototype.removeVertex = function (vertex) {
   if (!this[vertex]) throw "Vertex does not exist";
