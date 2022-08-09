@@ -80,31 +80,34 @@ const bubbleSort = function (array) {
 //* Merge sort: It leverages the concept of divide and conquer, in essence it's relatively simple to combine sorted arrays, so what we do is divide the whole array into to single item arrays, which are technically sorted, since they have single items. So what we do is merge those sorted arrays to get a single sorted array using recursion.
 
 function merge(array1, array2) {
-  let combined = [];
+  let result = [];
   let i = 0;
   let j = 0;
 
   while (i < array1.length && j < array2.length) {
     if (array1[i] < array2[j]) {
-      combined.push(array1[i]);
+      result.push(array1[i]);
       i++;
     } else {
-      combined.push(array2[j]);
+      result.push(array2[j]);
       j++;
     }
   }
+
   while (i < array1.length) {
-    combined.push(array1[i]);
+    result.push(array1[i]);
     i++;
   }
+
   while (j < array2.length) {
-    combined.push(array2[j]);
+    result.push(array2[j]);
     j++;
   }
-  return combined;
+
+  return result;
 }
 
-function mergeSort(array) {
+const mergeSort = function (array) {
   if (array.length === 1) return array;
 
   let mid = Math.floor(array.length / 2);
@@ -112,10 +115,7 @@ function mergeSort(array) {
   let right = array.slice(mid);
 
   return merge(mergeSort(left), mergeSort(right));
-}
+};
 
-mergeSort([3, 1, 4, 2]);
-
-const result = mergeSort([7, 2, 4, 3]);
-
+const result = testMergeSort([2, 4, 6, 1, 3, 5]);
 console.log(result);
