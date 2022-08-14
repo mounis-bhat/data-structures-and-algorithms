@@ -55,6 +55,30 @@ const getSmallestNumber = function (array = [0]) {
   for (let i = 0; i <= result.length; i++) if (!result[i]) return i + 1;
 };
 
-const result = getSmallestNumber();
+/*
+ * Implement a function called memoize which returns another function that memoizes the results based on input params
+ */
 
-console.log(result);
+const double = function (a) {
+  console.log("Running");
+  return a + a;
+};
+
+const memoize = function (fn) {
+  const map = new Map();
+
+  return function (n) {
+    if (!map.has(n)) {
+      const res = fn(n);
+      map.set(n, res);
+      console.log(res);
+    } else {
+      console.log(map.get(n));
+    }
+  };
+};
+
+const memoizedDbl = memoize(double);
+
+memoizedDbl(5);
+memoizedDbl(5);
