@@ -82,3 +82,81 @@ const memoizedDbl = memoize(double);
 
 memoizedDbl(5);
 memoizedDbl(5);
+
+// Check if a sentence is a pangram
+
+/**
+ * @param {string} sentence
+ * @return {boolean}
+ */
+
+const checkIfPangram = function (sentence) {
+  const alphabets = {
+    a: false,
+    b: false,
+    c: false,
+    d: false,
+    e: false,
+    f: false,
+    g: false,
+    h: false,
+    i: false,
+    j: false,
+    k: false,
+    l: false,
+    m: false,
+    n: false,
+    o: false,
+    p: false,
+    q: false,
+    r: false,
+    s: false,
+    t: false,
+    u: false,
+    v: false,
+    w: false,
+    x: false,
+    y: false,
+    z: false,
+  };
+
+  for (char of sentence) {
+    alphabets[char] = true;
+  }
+
+  for (let alphabet in alphabets) {
+    if (!alphabets[alphabet]) return false;
+  }
+
+  return true;
+
+  // const uniqueAlphabets = new Set(sentence.split(""));
+
+  // if (!uniqueAlphabets.size > 26) return false;
+
+  // return true
+};
+
+// Implement valid parentheses
+
+const isValid = function (s) {
+  const bracket = {
+    "(": ")",
+    "{": "}",
+    "[": "]",
+  };
+
+  let heap = [];
+
+  for (char of s) {
+    if (bracket[char]) {
+      heap.push(bracket[char]);
+    } else {
+      if (char !== heap.pop()) return false;
+    }
+  }
+
+  return !heap.length;
+};
+
+
