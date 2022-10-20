@@ -152,11 +152,120 @@ const isValid = function (s) {
     if (bracket[char]) {
       heap.push(bracket[char]);
     } else {
-      if (char !== heap.pop()) return false;
+      const popped = heap.pop();
+      if (char !== popped) return false;
     }
   }
-
   return !heap.length;
 };
 
+const removeDuplicates = function (nums) {
+  for (let index = 0; index < nums.length; index++) {
+    if (nums[index] === nums[index + 1]) {
+      nums.splice(index, 1);
+      index--;
+    }
+  }
+  return nums;
+};
 
+// alternate method
+
+const removeDuplicatesAlt = function (nums) {
+  return new Set(nums);
+};
+
+const removeElement = function (nums, val) {
+  for (let index = 0; index < nums.length; index++) {
+    if (nums[index] === val) {
+      nums.splice(index, 1);
+      index--;
+    }
+  }
+  return nums;
+};
+
+const searchInsert = function (nums, target) {
+  for (let index = 0; index < nums.length; index++)
+    if (target <= nums[index]) return index;
+  return nums.length;
+};
+
+const lengthOfLastWord = function (s) {
+  let words = s.split(" ").filter((value) => value.length > 0);
+  return words[words.length - 1].length;
+};
+
+const plusOne = function (array) {
+  for (let i = array.length - 1; i >= 0; i--) {
+    if (array[i] !== 9) {
+      array[i] = array[i] + 1;
+      return array;
+    } else {
+      array[i] = 0;
+    }
+  }
+  array.unshift(1);
+  return array;
+};
+
+const twoSum = function (array, target) {
+  const numsMap = {};
+
+  for ([key, value] of array.entries()) {
+    numsMap[value] = key;
+  }
+
+  for ([key, value] of array.entries()) {
+    const complement = target - value;
+    if (numsMap[complement]) {
+      return [key, numsMap[complement]];
+    }
+  }
+};
+
+const removeVowels = function (string) {
+  const vowels = ["a", "e", "i", "o", "u"];
+
+  let removed = "";
+
+  for (char of string) {
+    if (!vowels.includes(char)) {
+      removed += char;
+    }
+  }
+
+  return removed;
+};
+
+const findLargest = function (string) {
+  const removePunctuation = string
+    .split("")
+    .filter((value) => value !== ",")
+    .join("");
+
+  const uniques = new Set(removePunctuation.split(" "));
+
+  const arr = Array.from(uniques);
+
+  const sorted = arr.sort((a, b) => b.length - a.length);
+
+  const [largest] = sorted;
+
+  return largest;
+};
+
+const printNumber = function (i) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(i);
+      resolve();
+    }, 1000);
+  });
+};
+
+const printAll = async function () {
+  for (let i = 1; i <= 3; i++) {
+    await printNumber(i);
+  }
+};
